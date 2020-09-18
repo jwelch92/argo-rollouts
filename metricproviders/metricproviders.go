@@ -3,6 +3,7 @@ package metricproviders
 import (
 	"fmt"
 
+	"github.com/argoproj/argo-rollouts/metricproviders/newrelic"
 	"github.com/argoproj/argo-rollouts/metricproviders/wavefront"
 
 	"github.com/argoproj/argo-rollouts/metricproviders/kayenta"
@@ -67,6 +68,12 @@ func (f *ProviderFactory) NewProvider(logCtx log.Entry, metric v1alpha1.Metric) 
 			return nil, err
 		}
 		return wavefront.NewWavefrontProvider(client, logCtx), nil
+	case newrelic.ProviderType:
+		client, err := newrelic.NewNewRelicAPIClient(metric, f.KubeClient)
+		if err != nil {
+			return nil, err
+		}
+		return newrelic.NewNewRelicProvider(client, logCtx), nil
 	default:
 		return nil, fmt.Errorf("no valid provider in metric '%s'", metric.Name)
 	}
@@ -83,6 +90,8 @@ func Type(metric v1alpha1.Metric) string {
 		return webmetric.ProviderType
 	} else if metric.Provider.Wavefront != nil {
 		return wavefront.ProviderType
+	} else if metric.Provider.NewRelic != nil {
+		return newrelic.ProviderType
 	}
 	return "Unknown Provider"
 }

@@ -130,6 +130,8 @@ type MetricProvider struct {
 	Web *WebMetric `json:"web,omitempty"`
 	// Wavefront specifies the wavefront metric to query
 	Wavefront *WavefrontMetric `json:"wavefront,omitempty"`
+	// NewRelic specifies the newrelic metric to query
+	NewRelic *NewRelicMetric `json:"newrelic,omitempty"`
 	// Job specifies the job metric run
 	Job *JobMetric `json:"job,omitempty"`
 }
@@ -169,6 +171,23 @@ type WavefrontMetric struct {
 	// Address is the HTTP address and port of the wavefront server
 	Address string `json:"address,omitempty"`
 	// Query is a raw wavefront query to perform
+	Query string `json:"query,omitempty"`
+}
+
+type NewRelicRegion string
+
+const (
+	NewRelicRegionUS NewRelicRegion = "us"
+	NewRelicRegionEU NewRelicRegion = "eu"
+	// Only for internal New Relic use
+	NewRelicRegionStaging NewRelicRegion = "staging"
+)
+
+// NewRelicMetric defines the newrelic query to perform canary analysis
+type NewRelicMetric struct {
+	Region    NewRelicRegion `json:"region,omitempty"`
+	AccountID int            `json:"accountID,omitempty"`
+	// Query is a raw newrelic query to perform
 	Query string `json:"query,omitempty"`
 }
 
