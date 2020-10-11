@@ -2681,14 +2681,14 @@ spec:
                         - storageAccountName
                         - threshold
                         type: object
-                      newrelic:
+                      newRelic:
                         properties:
-                          accountID:
-                            type: integer
+                          profileSecretName:
+                            type: string
                           query:
                             type: string
-                          region:
-                            type: string
+                        required:
+                        - query
                         type: object
                       prometheus:
                         properties:
@@ -5497,14 +5497,14 @@ spec:
                         - storageAccountName
                         - threshold
                         type: object
-                      newrelic:
+                      newRelic:
                         properties:
-                          accountID:
-                            type: integer
+                          profileSecretName:
+                            type: string
                           query:
                             type: string
-                          region:
-                            type: string
+                        required:
+                        - query
                         type: object
                       prometheus:
                         properties:
@@ -8241,14 +8241,14 @@ spec:
                         - storageAccountName
                         - threshold
                         type: object
-                      newrelic:
+                      newRelic:
                         properties:
-                          accountID:
-                            type: integer
+                          profileSecretName:
+                            type: string
                           query:
                             type: string
-                          region:
-                            type: string
+                        required:
+                        - query
                         type: object
                       prometheus:
                         properties:

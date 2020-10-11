@@ -1813,7 +1813,7 @@ func schema_pkg_apis_rollouts_v1alpha1_MetricProvider(ref common.ReferenceCallba
 							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.WavefrontMetric"),
 						},
 					},
-					"newrelic": {
+					"newRelic": {
 						SchemaProps: spec.SchemaProps{
 							Description: "NewRelic specifies the newrelic metric to query",
 							Ref:         ref("github.com/argoproj/argo-rollouts/pkg/apis/rollouts/v1alpha1.NewRelicMetric"),
@@ -1932,26 +1932,22 @@ func schema_pkg_apis_rollouts_v1alpha1_NewRelicMetric(ref common.ReferenceCallba
 				Description: "NewRelicMetric defines the newrelic query to perform canary analysis",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
-					"region": {
+					"profileSecretName": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"accountID": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"integer"},
-							Format: "int32",
+							Description: "SecretName is the name of the secret holding NR account credentials",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"query": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Query is a raw newrelic query to perform",
+							Description: "Query is a raw newrelic NRQL query to perform",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 				},
+				Required: []string{"query"},
 			},
 		},
 	}
